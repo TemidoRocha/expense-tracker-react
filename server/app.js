@@ -13,7 +13,7 @@ app.use(serveFavicon(join(__dirname, 'public/images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(express.json());
 
-app.use('/', indexRouter);
+app.use('/API', indexRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {

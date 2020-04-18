@@ -3,16 +3,16 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-  name: {
+  text: {
     type: String,
-    trim: true
+    trim: true,
+    required: true
   },
-  email: {
-    type: String,
+  amount: {
+    type: Number,
     required: true,
-    lowercase: true,
     trim: true
   }
 });
 
-module.exports = mongoose.model('User', schema);
+module.exports = mongoose.model('Transaction', schema);
