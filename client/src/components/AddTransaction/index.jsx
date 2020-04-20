@@ -1,17 +1,35 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
+
+import { transactions as transactionsDB } from './../../services/transactions';
 
 function AddTransaction() {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
 
   const { addTransaction } = useContext(GlobalContext);
+  const { transactions } = useContext(GlobalContext);
+
+  useEffect(() => {
+    async function updateInitialState() {
+      try {
+        console.log('calling');
+        const result = await transactionsDB();
+        addTransaction(result[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (transactions.length === 0) {
+      updateInitialState();
+    }
+  });
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     const newTransaction = {
-      id: Math.floor(Math.random() * 100000000),
+      _id: Math.floor(Math.random() * 100000000),
       text,
       amount: +amount,
     };

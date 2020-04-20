@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: '/API',
+  baseURL: '/api',
 });
 
 const transactions = async () => {
@@ -16,7 +16,7 @@ const addTransaction = async (data) => {
 };
 
 //route to remove the users that were previously approved
-const deleteTransaction = async (id) => {
+const deleteTransaction = async (data) => {
   const result = await instance.delete(`/deleteTransaction`, data);
   return result.data;
 };

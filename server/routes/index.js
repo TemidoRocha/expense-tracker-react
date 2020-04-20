@@ -27,7 +27,7 @@ router.post('/addTransaction', (req, res, next) => {
     });
 });
 
-//rota para deletar workspace
+
 router.delete('/deleteTransaction', (req, res, next) => {
   Transaction.findByIdAndRemove(req.body._id)
     .then(() => {
