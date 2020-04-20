@@ -1,7 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 
-import { transactions as transactionsDB } from './../../services/transactions';
+import {
+  transactions as transactionsDB,
+  addTransaction as addTransactionDB,
+} from './../../services/transactions';
 
 function AddTransaction() {
   const [text, setText] = useState('');
@@ -13,9 +16,8 @@ function AddTransaction() {
   useEffect(() => {
     async function updateInitialState() {
       try {
-        console.log('calling');
-        const result = await transactionsDB();
-        addTransaction(result[0]);
+        const results = await transactionsDB();
+        results.map((result) => addTransaction(result));
       } catch (error) {
         console.log(error);
       }
@@ -33,8 +35,10 @@ function AddTransaction() {
       text,
       amount: +amount,
     };
-
+    addTransactionDB(newTransaction);
     addTransaction(newTransaction);
+    setText('');
+    setAmount(0);
   };
 
   return (

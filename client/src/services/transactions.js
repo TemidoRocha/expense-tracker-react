@@ -17,7 +17,7 @@ const addTransaction = async (data) => {
 
 //route to remove the users that were previously approved
 const deleteTransaction = async (data) => {
-  const result = await instance.delete(`/deleteTransaction`, data);
+  const result = await instance.delete(`/deleteTransaction/${data}`);
   return result.data;
 };
 

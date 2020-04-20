@@ -27,11 +27,10 @@ router.post('/addTransaction', (req, res, next) => {
     });
 });
 
-
-router.delete('/deleteTransaction', (req, res, next) => {
-  Transaction.findByIdAndRemove(req.body._id)
+router.delete('/deleteTransaction/:id', (req, res, next) => {
+  Transaction.findByIdAndRemove(req.params.id)
     .then(() => {
-      res.json({ message: `${req.body._id} was removed succesfully` });
+      res.json({ message: `${req.params.id} was removed succesfully` });
     })
     .catch((error) => {
       res.json(error);
